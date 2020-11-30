@@ -1,7 +1,7 @@
 provider "aws" {
-  access_key = "${var.access_key}"
-  secret_key = "${var.secret_key}"
-  region = "${var.region}"
+  access_key = var.access_key
+  secret_key = var.secret_key
+  region = var.region
 }
 
 resource "aws_security_group" "security_group_jenkins" {
@@ -63,7 +63,7 @@ resource "aws_security_group" "security_group_jenkins" {
 }
 
 resource "aws_instance" "jenkins" {
-  instance_type = "${var.jenkins_instance_type}"
+  instance_type = var.jenkins_instance_type
   security_groups = ["${aws_security_group.security_group_jenkins.name}"]
   ami = "${lookup(var.amis, var.region)}"
   key_name = "${var.jenkins_key_name}"
